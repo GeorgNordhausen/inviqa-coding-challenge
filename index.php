@@ -42,7 +42,7 @@ class InviquaSalary
         {
 
             $line = $month;
-            
+           
             $line = ' Base salary on: '.$month . ', Bonus on: '. $extras[$extraCounter];
             fputcsv($file,explode(',',$line));
             $extraCounter++;
@@ -79,6 +79,11 @@ class InviquaSalary
             
             $months[] = $new_month;
             
+
+        }
+
+
+
         foreach ($months as $month) {
             echo $month.PHP_EOL;
         }
@@ -100,7 +105,7 @@ class InviquaSalary
         
        
         for ($x = $currentMonth; $x < $currentMonth + 12; $x++) {
-            
+        
             $tempday =  date('D', mktime(0, 0, 0, $x, 15, $currentYear));
             
             if ($tempday == "Sun") {
@@ -112,7 +117,7 @@ class InviquaSalary
                 $weekday =  date('D-j-m-Y', mktime(0, 0, 0, $x, 15, $currentYear));
             }
             $extras[] = $weekday;
-            
+        
         }
 
 
@@ -125,22 +130,25 @@ class InviquaSalary
 
 
     public function getCommandLineOptions() {
-       $options = getopt("f:hp:");
-      // $options = $argv; 
-       
-       return $options['f'];
-      // return $argv;
+        $options = getopt("f:hp:");
+        return $options['f'];
        
     }
 
 }
 
+
     $salaries = new InviquaSalary();
+
 
     $cmdDate = $salaries->getCommandLineOptions();
     
     echo 'Please define a starting Date in the format -f4 Digit year- 2 digit month- 2 digit day example: "-f2018-01-01"'.PHP_EOL;
     
+    
+
     $salaries->writeCSV("payments.csv", $salaries->getNext12Months($date=$cmdDate), $salaries->getNext12Extras($date=$cmdDate));
     
     echo 'Output was written to file payments.csv';
+    
+    
