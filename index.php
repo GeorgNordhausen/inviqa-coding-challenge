@@ -125,8 +125,11 @@ class InviquaSalary
 
 
     public function getCommandLineOptions() {
-        $options = getopt("f:hp:");
-        return $options['f'];
+       $options = getopt("f:hp:");
+      // $options = $argv; 
+       
+       return $options['f'];
+      // return $argv;
        
     }
 
