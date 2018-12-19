@@ -42,11 +42,7 @@ class InviquaSalary
         {
 
             $line = $month;
-            //$basePayDate = $this->getLastDayOfMonth($month);
             
-
-
-            //$line .= ' Base salary on: '.$this->printNameOfDay($basePayDate) .' '.$basePayDate . ', Extra on: '. $extras[$extraCounter];
             $line = ' Base salary on: '.$month . ', Bonus on: '. $extras[$extraCounter];
             fputcsv($file,explode(',',$line));
             $extraCounter++;
@@ -62,7 +58,7 @@ class InviquaSalary
         if ($date !== "") {
             $currentMonth = date("m",strtotime($date));
             $currentYear = date("Y", strtotime($date));
-            //echo "currentMonth:".$currentMonth;
+            
         } else {
             $currentMonth = (int)date('m');
         }
@@ -82,39 +78,7 @@ class InviquaSalary
             }
             
             $months[] = $new_month;
-            //echo $new_month.PHP_EOL;
-
-        }
-
-        /*for ($x = $currentMonth; $x < $currentMonth + 12; $x++) {
-           // $tempday =  date('D', mktime(0, 0, 0, $x, 1, $currentYear));
-
-
-          
-           
-           //echo  date('D-j-m-Y', mktime(0, 0, 0, $x, date("t", strtotime($date)), $currentYear)).PHP_EOL;
-           
-            if ($this->getLastDayOfMonth($x) == "Sun") {
-                $weekday =  date('D-j-m-Y', mktime(0, 0, 0, $x, date("t", strtotime($date))-2, $currentYear));
-              
-            } else if ($this->getLastDayOfMonth($x) == "Sat") {
-                $weekday =  date('D-j-m-Y', mktime(0, 0, 0, $x, date("t", strtotime($date))-1, $currentYear));
-              
-            }
-            else {
-                $weekday =  date('D-j-m-Y', mktime(0, 0, 0, $x, date("t", strtotime($date)), $currentYear));
-            }
-
-
-
-            //$months[] = date('Y-m', mktime(0, 0, 0, $x, 1, $currentYear));
-            $months[] = $weekday;
             
-
-            //$months['day'] = date('D', mktime(0, 0, 0, $x, 1, $currentYear));
-        }*/
-
-
         foreach ($months as $month) {
             echo $month.PHP_EOL;
         }
@@ -129,14 +93,14 @@ class InviquaSalary
         if ($date !== "") {
             $currentMonth = date("m",strtotime($date));
             $currentYear = date("Y", strtotime($date));
-            //echo "currentMoneth:".$currentMonth;
+            
         } else {
             $currentMonth = (int)date('m');
         }
         
        
         for ($x = $currentMonth; $x < $currentMonth + 12; $x++) {
-            //$months[] = date('Y-m', mktime(0, 0, 0, $x, 1, $currentYear));
+            
             $tempday =  date('D', mktime(0, 0, 0, $x, 15, $currentYear));
             
             if ($tempday == "Sun") {
@@ -148,7 +112,7 @@ class InviquaSalary
                 $weekday =  date('D-j-m-Y', mktime(0, 0, 0, $x, 15, $currentYear));
             }
             $extras[] = $weekday;
-            //echo   date('D-j-m-Y', mktime(0, 0, 0, $x, 15, $currentYear)).PHP_EOL;
+            
         }
 
 
@@ -168,20 +132,12 @@ class InviquaSalary
 
 }
 
-
     $salaries = new InviquaSalary();
 
-//    $salaries->tests();
     $cmdDate = $salaries->getCommandLineOptions();
     
     echo 'Please define a starting Date in the format -f4 Digit year- 2 digit month- 2 digit day example: "-f2018-01-01"'.PHP_EOL;
     
-    //echo $cmdDate;
-
     $salaries->writeCSV("payments.csv", $salaries->getNext12Months($date=$cmdDate), $salaries->getNext12Extras($date=$cmdDate));
     
     echo 'Output was written to file payments.csv';
-    //$salaries->writeCSV("payments.csv", $salaries->getNext12Extras($date="2019-01-08"));
-
-    //$salaries->getNext12Months();
-    
