@@ -1,4 +1,4 @@
-# inviqa-coding-challenge
+# inviqa coding challenge
 
 # This is an exercise for the Inviqa Burroughs test
 
