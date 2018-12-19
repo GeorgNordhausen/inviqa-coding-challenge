@@ -127,27 +127,16 @@ class InviquaSalary
 
         return $extras;
     }
-
-
-    public function getCommandLineOptions() {
-        $options = getopt("f:hp:");
-        return $options['f'];
-       
-    }
-
 }
-
 
     $salaries = new InviquaSalary();
 
-
-    $cmdDate = $salaries->getCommandLineOptions();
+    $filename = $argv[1];
+    $cmdDate = $argv[2];
     
-    echo 'Please define a starting Date in the format -f4 Digit year- 2 digit month- 2 digit day example: "-f2018-01-01"'.PHP_EOL;
+    echo 'Please define a starting filename and Date in the format 4 Digit year- 2 digit month- 2 digit day example: "2018-01-01"'.PHP_EOL;
     
-    
-
-    $salaries->writeCSV("payments.csv", $salaries->getNext12Months($date=$cmdDate), $salaries->getNext12Extras($date=$cmdDate));
+    $salaries->writeCSV($filename, $salaries->getNext12Months($date=$cmdDate), $salaries->getNext12Extras($date=$cmdDate));
     
     echo 'Output was written to file payments.csv';
     
